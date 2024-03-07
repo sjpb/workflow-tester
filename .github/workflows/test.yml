@@ -16,10 +16,18 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        image: ${{ fromJSON(inputs.test_RL9 && '["RL8", "RL9"]' || '["RL8"]') }}
+        image: [RL8, RL9]
+        exclude:
+          # don't run RL9 if not specifically selected:
+          - image: ${{ (! inputs.test_RL9) && 'RL9' }} # only potentially true for workflow_dispatch
+          # don't run RL9 if unless the PR's branch name starts with rl9
+          - image: ${{ !startsWith(github.head_ref, 'rl9') && 'RL9'}} # only potentially for pull_request
+          # don't run RL9 on merge to main:
+          # TODO
 
     steps:
       - name: Debug
         run: |
           echo test_RL9: ${{ inputs.test_RL9 }}
           echo matrix: ${{ matrix.image }}
+          echo github.head_ref: ${{ github.head_ref }}
