@@ -1,0 +1,14 @@
+name: test matrix with inputs
+'on':
+  workflow_dispatch:
+  push: # don't want this for build
+    branches:
+      - main
+  pull_request:
+jobs:
+  test:
+    name: test-job
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Debug
+        run: echo done
