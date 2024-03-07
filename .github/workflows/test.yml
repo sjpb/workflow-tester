@@ -1,6 +1,11 @@
 name: test matrix with inputs
 'on':
   workflow_dispatch:
+    inputs:
+      test_RL9:
+         required: true
+         type: boolean
+         default: false
   push: # don't want this for build
     branches:
       - main
@@ -11,4 +16,4 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Debug
-        run: echo done
+        run: echo ${{ inputs.test_RL9 }}
