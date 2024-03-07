@@ -17,11 +17,15 @@ jobs:
     strategy:
       matrix:
         image: [RL8, RL9]
+        rl9_selected:
+          - ${{ inputs.test_RL9 == true }} # only potentially true for workflow_dispatch
+        rl9_branch:
+          - ${{ startsWith(github.head_ref, 'rl9') }} # only potentially for pull_request
         exclude:
-          # don't run RL9 if not specifically selected:
-          - image: ${{ (! inputs.test_RL9) && 'RL9' }} # only potentially true for workflow_dispatch
-          # don't run RL9 if unless the PR's branch name starts with rl9
-          - image: ${{ !startsWith(github.head_ref, 'rl9') && 'RL9'}} # only potentially for pull_request
+          - image: RL9
+            rl9_selected: false
+          - image: RL9
+            rl9_branch: true
           # don't run RL9 on merge to main:
           # TODO
 
