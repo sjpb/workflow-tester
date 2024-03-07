@@ -20,14 +20,14 @@ jobs:
         rl9_selected:
           - ${{ inputs.test_RL9 == true }} # only potentially true for workflow_dispatch
         rl9_branch:
-          - ${{ startsWith(github.head_ref, 'rl9') }} # only potentially for pull_request
+          - ${{ startsWith(github.head_ref, 'rl9') == true }} # only potentially for pull_request
         exclude:
           - image: RL9
             rl9_selected: false
           - image: RL9
-            rl9_branch: true
+            rl9_branch: false
           # don't run RL9 on merge to main:
-          # TODO - WIP
+          # is automatically the case for non- 'rl9..' branches
 
     steps:
       - name: Debug
