@@ -24,8 +24,8 @@ jobs:
         exclude:
           - image: RL9
             rl9_selected: false
-          - image: RL9
-            rl9_branch: false
+          # - image: RL9
+          #   rl9_branch: false
           # don't run RL9 on merge to main:
           # is automatically the case for non- 'rl9..' branches
           # a change
