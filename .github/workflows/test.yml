@@ -24,10 +24,10 @@ jobs:
         exclude:
           - image: RL9
             rl9_selected: false
-          - image: RL9
             rl9_branch: false
           # don't run RL9 on merge to main:
           # is automatically the case for non- 'rl9..' branches
+          # a change
 
     steps:
       - name: Debug
@@ -35,3 +35,4 @@ jobs:
           echo test_RL9: ${{ inputs.test_RL9 }}
           echo matrix: ${{ matrix.image }}
           echo github.head_ref: ${{ github.head_ref }}
+          echo is rl9: ${{ startsWith(github.head_ref, 'rl9') == true }}
